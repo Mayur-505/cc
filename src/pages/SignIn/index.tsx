@@ -9,6 +9,7 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
+import Forgot from '../Forgot/index'
 
 
 
@@ -104,6 +105,7 @@ export default function SignIn() {
     setvalues((value) => ({ ...value, [e.target.name]: e.target.value }));
 
   }
+  if(!isForget){
   return (
     <>
       <div>
@@ -149,10 +151,10 @@ export default function SignIn() {
                       variant="outlined"
                     />
                     <br />
-                    {/* <div onClick={() => setisForget(!isForget)}>
-                      <p>Forgot Password?</p>                  
-                      </div> */}
-                    <br />
+                    <div onClick={() => setisForget(!isForget)}>
+                      <Link>Forgot Password?</Link>                  
+                      </div>
+                 
                     <Button
                       type="submit"
                       variant="contained"
@@ -190,4 +192,8 @@ export default function SignIn() {
       </style>
     </>
   );
+}
+else{
+  return <Forgot />
+}
 }

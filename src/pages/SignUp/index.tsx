@@ -1,79 +1,103 @@
-import { Button, Container, Grid, TextField, Typography } from '@mui/material';
-import React, { useState } from 'react';
+import {
+  Button,
+  Container,
+  Grid,
+  TextField,
+  Typography,
+} from '@mui/material';
+import React from 'react';
 import { makeStyles } from '@mui/styles';
 import Paper from '@mui/material/Paper';
+import Link from '@mui/material/Link';
+import Forgot from '../Forgot/index'
 import Checkbox from '@mui/material/Checkbox';
 import CircleChecked from '@mui/icons-material/CheckCircleOutline';
 import CircleUnchecked from '@mui/icons-material/RadioButtonUnchecked';
-import { register } from '../../utils/xino-api';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+
+
 
 export default function RegisterPage() {
-  const paperStyle = { padding: '20px 20px', width: 850, margin: '20px ' };
+  const [values, setvalues] = React.useState({});
+  const [isForget, setisForget] = React.useState(false);
+  // const dispatch = useDispatch();
+  const paperStyle: any = {
 
-  const [state, setstate] = useState({
-    username: 'jamesbond007',
-    gender: 'male',
-    email: '',
-    password: '',
-  });
+    width: '850px',
+    boxShadow: 'none',
+    border: '1px solid #ededed',
+    margin: '0',
+    position: 'absolute',
+    top: '40%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
 
-  React.useEffect(() => {
-    console.log('signdata', state);
-  }, [state]);
 
-  const useStyles = makeStyles({
+  };
+
+  const paperStyleinner = {
+    justifyContent: 'space-between',
+  };
+  const useStyles: any = makeStyles({
     typography: {
       color: '#111',
-      fontSize: '27.36px',
+      marginTop: '15px',
+      fontSize: '27.66px',
+      fontWeight: 'bold',
       fontFamily:
         'Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
     },
     typography1: {
-      marginTop: '25px',
       color: '#71717a',
-      fontSize: '19px',
-
+      marginTop: '15px',
+      fontSize: '16px',
+      fontFamily:
+        'Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
+    },
+    typography2: {
+      color: '#71717a',
+      marginTop: '9px',
+      fontSize: '16px',
       fontFamily:
         'Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
     },
     textField: {
       display: 'flex',
-      marginTop: '20px',
-      width: '100%',
-
       marginLeft: 'auto',
       marginRight: 'auto',
-      backgroundColor: '#f3f4f6',
+      border: 'none',
+      outline: 'none',
     },
     signUpButton: {
       marginTop: '20px',
-      color: 'primary',
-      fontSize: '20px',
+      fontSize: '16px',
       fontFamily:
         'Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
-      borderRadius: '12px',
-    },
-    checkbox: {
-      marginTop: '20px',
+      fontWeight: 'bold',
       color: 'primary',
-      fontSize: '14px',
-      fontFamily:
-        'Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
-      borderRadius: '10px',
     },
     loginButton: {
       marginTop: '20px',
-
+      background: 'secondry',
       color: 'primary',
-      fontSize: '20px',
+      fontSize: '16px',
       fontFamily:
         'Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
+      borderRadius: '10px',
       marginLeft: '7px',
       fontWeight: 'bold',
     },
     img: {
       backgroundColor: '#fef1f6',
-      width: '100',
+      borderTopRightRadius: '15px',
+      borderBottomRightRadius: '15px',
+    },
+    input: {
+      padding: '0px'
     },
     root: {
       '&$focused $notchedOutline': {
@@ -84,106 +108,163 @@ export default function RegisterPage() {
     focused: {},
     notchedOutline: {},
   });
-  const classes: any = useStyles();
-  const userData = async (e: any) => {
-    const formData = new FormData();
-    formData.append('v', '1.0');
-    formData.append('server_key', '1312a113c58715637a94437389326a49');
-    formData.append('username', state.username);
-    formData.append('email', state.email);
-    formData.append('password', state.password);
-    formData.append('confirm_password', state.password);
-    formData.append('gender', state.gender);
+  const classes = useStyles();
 
-    try {
-      const reg = await register(formData);
-      console.log('reggg', reg);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  const handleOnSubmit = (e: any) => {
+    e.preventDefault()
+    console.log(values)
+    // dispatch(loginData(values))
+  }
+  const handleOnChange = (e: any) => {
+    e.persist()
+    setvalues((value) => ({ ...value, [e.target.name]: e.target.value }));
+
+  }
+
   return (
     <>
-      <div className={classes.main}>
-        <Container maxWidth="sm">
-          <Paper elevation={2} style={paperStyle}>
-            <Grid container spacing={2}>
-              <Grid item xs={6}>
-                <Typography className={classes.typography}>Join</Typography>
-                <Typography className={classes.typography1}>Email</Typography>
-                <TextField
-                  className={classes.textField}
-                  onChange={(e) => {
-                    setstate({ ...state, email: e.target.value });
-                  }}
-                  InputProps={{
-                    classes: {
-                      root: classes.root,
-                      focused: classes.focused,
-                      notchedOutline: classes.notchedOutline,
-                    },
-                  }}
-                  placeholder="yourstruly@example.com"
-                  variant="outlined"
-                />
-                <Typography className={classes.typography1}>Password</Typography>
-                <TextField
-                  onChange={(e) => {
-                    setstate({ ...state, password: e.target.value });
-                  }}
-                  className={classes.textField}
-                  InputProps={{
-                    classes: {
-                      root: classes.root,
-                      focused: classes.focused,
-                      notchedOutline: classes.notchedOutline,
-                    },
-                  }}
-                  type="password"
-                  variant="outlined"
-                />
-                <br />
-                <Grid container>
-                  <Checkbox
-                    className={classes.checkbox}
-                    icon={<CircleUnchecked />}
-                    color="primary"
-                    checkedIcon={<CircleChecked />}
-                  />{' '}
-                  <Typography className={classes.typography1}>Sync my Youtube channel</Typography>
-                </Grid>
-                <Button href="#" variant="contained" color="primary" className={classes.signUpButton} onClick={userData}>
-                  Sign up
-                </Button>
-                <Button color="primary" className={classes.loginButton}>
-                  Log in
-                </Button>
-                <br />
+      <div>
+        <div className={classes.main}>
+          <Container maxWidth="sm">
+            <Paper style={paperStyle}>
+              <Grid container style={paperStyleinner} >
+                <Grid xs={12} lg={6} style={{ padding: '16px' }}>
+                  <Typography className={classes.typography}>
+                     Join
+                  </Typography>
+                  <form onSubmit={(e) => handleOnSubmit(e)}>
+                  <Typography className={classes.typography1}>Username</Typography>
+                    <TextField
+                      className={classes.textField}
+                      
+                      name="username"
+                      onChange={handleOnChange}
+                      InputProps={{
+                        classes: {
+                          root: classes.root,
+                          focused: classes.focused,
+                          notchedOutline: classes.notchedOutline,
+                        },
+                      }}
+                      variant="outlined"
+                    />
+                    <Typography className={classes.typography1}>Email</Typography>
+                    <TextField
+                      className={classes.textField}
+                    
+                      name="email"
+                      onChange={handleOnChange}
+                      InputProps={{
+                        classes: {
+                          root: classes.root,
+                          focused: classes.focused,
+                          notchedOutline: classes.notchedOutline,
+                        },
+                      }}
+                      variant="outlined"
+                    />
+                    <Typography className={classes.typography1}>Password</Typography>
+                    <TextField
+                      className={classes.textField}
+                      type="password"
+                      name="password"
+                      // onChange={(e)=>{setstate({...state,password:e.target.value})}}
+                      InputProps={{
+                        className: classes.input,
 
-                <Typography className={classes.typography1}>
-                  By creating an account, you agree to our terms and confirm you&apos;re over the age of 13.
+                        classes: {
+                          root: classes.root,
+                          focused: classes.focused,
+                          notchedOutline: classes.notchedOutline,
+                        },
+                      }}
+                      variant="outlined"
+                    />
+                    <Typography className={classes.typography1}>Confirm Password</Typography>
+                    <TextField
+                      className={classes.textField}
+                      type="password"
+                      name="confirm_password"
+                      // onChange={(e)=>{setstate({...state,password:e.target.value})}}
+                      InputProps={{
+                        className: classes.input,
+
+                        classes: {
+                          root: classes.root,
+                          focused: classes.focused,
+                          notchedOutline: classes.notchedOutline,
+                        },
+                      }}
+                      variant="outlined"
+                    />
+                      <FormControl>
+                      <Typography className={classes.typography1}>Gender</Typography>
+      <RadioGroup
+        row
+        aria-labelledby="demo-row-radio-buttons-group-label"
+        name="row-radio-buttons-group"
+      >
+        <FormControlLabel value="female" control={<Radio />} label="Female" />
+        <FormControlLabel value="male" control={<Radio />} label="Male" />
+       
+        
+      </RadioGroup>
+    </FormControl>
+                       
+                    <br/>
+                     <Grid container>
+                <Checkbox
+                  className={classes.checkbox}
+                  icon={<CircleUnchecked />}
+                  color="primary"
+                  checkedIcon={<CircleChecked />}
+                />{' '}
+                <Typography className={classes.typography2}>
+                  Sync my Youtube channel
                 </Typography>
-                <br />
               </Grid>
-              <div className={classes.img}>
-                <Grid item xs={6}>
-                  <img alt="" src="https://cdn.lbryplayer.xyz/speech/odysee-sign-up:d.png" />
+                        
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      className={classes.loginButton}
+                    >
+                      Log in
+                    </Button>
+                    <Button color="primary" className={classes.signUpButton}>sign Up</Button>
+                    <Typography className={classes.typography1}>
+                By creating an account, you agree to our terms and confirm
+                you&apos;re over the age of 13.
+              </Typography>
+                  </form>
                 </Grid>
-              </div>
-            </Grid>
-          </Paper>
-        </Container>
+                <Grid item xs={12} lg={6}>
+                  <div className={classes.img}>
+                    <img
+                      alt=""
+                      src="https://cdn.lbryplayer.xyz/speech/odysee-sign-up:d.png"
+                    />
+                  </div>
+                </Grid>
+
+              </Grid>
+            </Paper>
+          </Container>
+        </div>
       </div>
       <style>
         {
           `
-            .MuiInputBase-input {
-              padding: 12px 12px ;
-              border-radius: 10px;
-          }
-            `
+          .MuiInputBase-input {
+            padding: 12px 12px ;
+            border-radius: 10px;
+        }
+          `
         }
       </style>
     </>
   );
 }
+
+
