@@ -7,10 +7,6 @@ const SignOut = () => {
 
     const history = useHistory()
     const dispatch = useDispatch()
-<<<<<<< Updated upstream
-    console.log('ok')
-=======
->>>>>>> Stashed changes
 
    useEffect(() => {
      dispatch(loginuser({

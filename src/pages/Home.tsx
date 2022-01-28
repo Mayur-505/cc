@@ -10,11 +10,6 @@ import { APP_TITLE, PAGE_TITLE_HOME } from '../utils/constants';
 export const Home = () => {
   const context = useContext(AppContext);
 const data=useSelector(state=>state)
-<<<<<<< Updated upstream
-
-console.log("dattaa",data);
-=======
->>>>>>> Stashed changes
 
   return (
     <>
