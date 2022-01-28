@@ -45,6 +45,18 @@ export const getAppTheme = (mode: typeof LIGHT_MODE_THEME | typeof DARK_MODE_THE
           main: secondaryColor
         }
       },
+      components: {
+        MuiButton: {
+          styleOverrides: {
+            root: {
+              fontSize: '1rem',
+              borderRadius: undefined,
+              padding: 0
+            },
+          },
+        },
+        
+      },
       typography: {
         fontFamily: 'Times New Roman',
         fontSize: 15,
