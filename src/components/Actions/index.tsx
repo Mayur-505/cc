@@ -12,6 +12,7 @@ import {
 } from '@mui/icons-material';
 
 import { ActionItem } from './ActionItem';
+import { useSelector } from 'react-redux';
 
 interface ActionProps {
   total?: number;

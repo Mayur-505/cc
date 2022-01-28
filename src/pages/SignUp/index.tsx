@@ -18,13 +18,23 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginuser } from '../../Redux/action';
+import { register } from '../../utils/xino-api'
 
 
 export default function RegisterPage() {
-  const [values, setvalues] = React.useState({});
+  const [values, setvalues] = React.useState({
+    username:'',
+    email:'',
+   password:'',
+   confirm_password:'',
+   authError:''
+  });
   const [isForget, setisForget] = React.useState(false);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const history =useHistory()
   const paperStyle: any = {
 
     width: '850px',
@@ -110,10 +120,50 @@ export default function RegisterPage() {
   });
   const classes = useStyles();
 
-  const handleOnSubmit = (e: any) => {
+  const handleOnSubmit = async(e: any) => {
     e.preventDefault()
-    console.log(values)
+  console.log("value",values);
+
+  const formData = new FormData();
+  formData.append('v', '1.0');
+  formData.append('server_key', '1312a113c58715637a94437389326a49');
+  formData.append('username', values.username);
+  formData.append('email', values.email);
+  formData.append('password', values.password);
+  formData.append('confirm_password', values.confirm_password);
+  // dispatch(loginData(values))
+
+  console.log("formdata", formData);
+
+  try {
+    const res = await register(formData)
+    console.log("response", res);
+    if (res && res.data.success_type === 'registered') {
+      setvalues({ ...values, authError:'' })
+      dispatch(loginuser({
+        'username': values.username,
+        'userId': res.data.data.user_id,
+        'auth': true
+      }))
+
+      history.push('/')
+    }
+    else {
+      setvalues({ ...values, authError: res.data.errors.error_text })
+      dispatch(loginuser({
+        'username': undefined,
+        'userId': undefined,
+        'auth': false
+      }))
+    }
+  } catch (error) {
+    console.log("error", error);
+
+
+  }
+
     // dispatch(loginData(values))
+
   }
   const handleOnChange = (e: any) => {
     e.persist()
@@ -130,13 +180,12 @@ export default function RegisterPage() {
               <Grid container style={paperStyleinner} >
                 <Grid xs={12} lg={6} style={{ padding: '16px' }}>
                   <Typography className={classes.typography}>
-                     Join
+                    Join
                   </Typography>
                   <form onSubmit={(e) => handleOnSubmit(e)}>
-                  <Typography className={classes.typography1}>Username</Typography>
+                    <Typography className={classes.typography1}>Username</Typography>
                     <TextField
                       className={classes.textField}
-                      
                       name="username"
                       onChange={handleOnChange}
                       InputProps={{
@@ -151,7 +200,7 @@ export default function RegisterPage() {
                     <Typography className={classes.typography1}>Email</Typography>
                     <TextField
                       className={classes.textField}
-                    
+
                       name="email"
                       onChange={handleOnChange}
                       InputProps={{
@@ -168,6 +217,7 @@ export default function RegisterPage() {
                       className={classes.textField}
                       type="password"
                       name="password"
+                      onChange={handleOnChange}
                       // onChange={(e)=>{setstate({...state,password:e.target.value})}}
                       InputProps={{
                         className: classes.input,
@@ -185,6 +235,7 @@ export default function RegisterPage() {
                       className={classes.textField}
                       type="password"
                       name="confirm_password"
+                      onChange={handleOnChange}
                       // onChange={(e)=>{setstate({...state,password:e.target.value})}}
                       InputProps={{
                         className: classes.input,
@@ -197,46 +248,53 @@ export default function RegisterPage() {
                       }}
                       variant="outlined"
                     />
-                      <FormControl>
+                    <FormControl>
                       <Typography className={classes.typography1}>Gender</Typography>
-      <RadioGroup
-        row
-        aria-labelledby="demo-row-radio-buttons-group-label"
-        name="row-radio-buttons-group"
-      >
-        <FormControlLabel value="female" control={<Radio />} label="Female" />
-        <FormControlLabel value="male" control={<Radio />} label="Male" />
-       
-        
-      </RadioGroup>
-    </FormControl>
-                       
-                    <br/>
-                     <Grid container>
-                <Checkbox
-                  className={classes.checkbox}
-                  icon={<CircleUnchecked />}
-                  color="primary"
-                  checkedIcon={<CircleChecked />}
-                />{' '}
-                <Typography className={classes.typography2}>
-                  Sync my Youtube channel
-                </Typography>
-              </Grid>
-                        
+                      <RadioGroup
+                        row
+                        aria-labelledby="demo-row-radio-buttons-group-label"
+                        name="gender"
+                        onChange={handleOnChange}
+                      >
+                        <FormControlLabel value="female" control={<Radio />} label="Female" />
+                        <FormControlLabel value="male" control={<Radio />} label="Male" />
+
+
+                      </RadioGroup>
+                    </FormControl>
+
+                    <br />
+                    <Grid container>
+                      <Checkbox
+                        className={classes.checkbox}
+                        icon={<CircleUnchecked />}
+                        color="primary"
+                        checkedIcon={<CircleChecked />}
+                      />{' '}
+                      <Typography className={classes.typography2}>
+                        Sync my Youtube channel
+                      </Typography>
+                    </Grid>
+                    {values.authError &&
+                      <div>
+                        <Typography color="primary">
+                          {values.authError}
+                        </Typography>
+                      </div>
+                    }
                     <Button
                       type="submit"
                       variant="contained"
                       color="primary"
                       className={classes.loginButton}
                     >
-                      Log in
+                      Sign Up
                     </Button>
-                    <Button color="primary" className={classes.signUpButton}>sign Up</Button>
+                    <Button onClick={()=>{history.push('/signin')}} color="primary" className={classes.signUpButton}>Sign In</Button>
                     <Typography className={classes.typography1}>
-                By creating an account, you agree to our terms and confirm
-                you&apos;re over the age of 13.
-              </Typography>
+                      By creating an account, you agree to our terms and confirm
+                      you&apos;re over the age of 13.
+                    </Typography>
                   </form>
                 </Grid>
                 <Grid item xs={12} lg={6}>

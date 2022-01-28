@@ -1,6 +1,10 @@
+import React, { useEffect, useState } from 'react';
 import { Divider, Menu, MenuItem } from '@mui/material';
 
 import { Settings, Preferences, SignOut } from '../../Actions';
+import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux';
+import { loginuser } from '../../../Redux/action';
 
 interface DefaultMenuProps {
   isMenuOpen: boolean;
@@ -8,7 +12,15 @@ interface DefaultMenuProps {
   anchorEl: HTMLElement | null;
 }
 
-export const DefaultMenu = ({ isMenuOpen, handleMenuClose, anchorEl }: DefaultMenuProps) => (
+export const DefaultMenu = ({ isMenuOpen, handleMenuClose, anchorEl }: DefaultMenuProps) => {
+  const history = useHistory()
+  const dispatch = useDispatch()
+  const [values, setvalues] = useState({
+    email: '',
+    password: '',
+    authError: ''
+  });
+  return (
   <Menu anchorEl={anchorEl} id="primary-search-account-menu" keepMounted open={isMenuOpen} onClose={handleMenuClose}>
     <MenuItem onClick={handleMenuClose}>
       <Settings disableTooltip />
@@ -19,9 +31,18 @@ export const DefaultMenu = ({ isMenuOpen, handleMenuClose, anchorEl }: DefaultMe
       Preferences
     </MenuItem>
     <Divider />
-    <MenuItem onClick={handleMenuClose}>
+    <MenuItem onClick={() => {
+      handleMenuClose()
+      dispatch(loginuser({
+        'username': undefined,
+        'userId':undefined,
+        'auth': false,
+      }))
+      history.push('/signin')
+
+    }}>
       <SignOut disableTooltip />
       Sign Out
     </MenuItem>
   </Menu>
-);
+)};

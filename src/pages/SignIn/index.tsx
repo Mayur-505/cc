@@ -206,9 +206,9 @@ export default function SignIn() {
                       color="primary"
                       className={classes.loginButton}
                     >
-                      Log in
+                      Sign In
                     </Button>
-                    <Button color="primary" className={classes.signUpButton}>sign Up</Button>
+                    <Button onClick={()=>{history.push('/signup')}} color="primary" className={classes.signUpButton}>sign Up</Button>
                   </form>
                 </Grid>
                 <Grid item xs={12} lg={6}>
