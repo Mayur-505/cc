@@ -84,8 +84,8 @@ export default function RegisterPage() {
     focused: {},
     notchedOutline: {},
   });
-  const classes:any = useStyles();
-  const userData = async (e:any) => {
+  const classes: any = useStyles();
+  const userData = async (e: any) => {
     const formData = new FormData();
     formData.append('v', '1.0');
     formData.append('server_key', '1312a113c58715637a94437389326a49');
@@ -103,75 +103,87 @@ export default function RegisterPage() {
     }
   };
   return (
-    <div className={classes.main}>
-      <Container maxWidth="sm">
-        <Paper elevation={2} style={paperStyle}>
-          <Grid container spacing={2}>
-            <Grid item xs={6}>
-              <Typography className={classes.typography}>Join</Typography>
-              <Typography className={classes.typography1}>Email</Typography>
-              <TextField
-                className={classes.textField}
-                onChange={(e) => {
-                  setstate({ ...state, email: e.target.value });
-                }}
-                InputProps={{
-                  classes: {
-                    root: classes.root,
-                    focused: classes.focused,
-                    notchedOutline: classes.notchedOutline,
-                  },
-                }}
-                placeholder="yourstruly@example.com"
-                variant="outlined"
-              />
-              <Typography className={classes.typography1}>Password</Typography>
-              <TextField
-                onChange={(e) => {
-                  setstate({ ...state, password: e.target.value });
-                }}
-                className={classes.textField}
-                InputProps={{
-                  classes: {
-                    root: classes.root,
-                    focused: classes.focused,
-                    notchedOutline: classes.notchedOutline,
-                  },
-                }}
-                type="password"
-                variant="outlined"
-              />
-              <br />
-              <Grid container>
-                <Checkbox
-                  className={classes.checkbox}
-                  icon={<CircleUnchecked />}
-                  color="primary"
-                  checkedIcon={<CircleChecked />}
-                />{' '}
-                <Typography className={classes.typography1}>Sync my Youtube channel</Typography>
-              </Grid>
-              <Button href="#" variant="contained" color="primary" className={classes.signUpButton} onClick={userData}>
-                Sign up
-              </Button>
-              <Button color="primary" className={classes.loginButton}>
-                Log in
-              </Button>
-              <br />
-
-              <Typography className={classes.typography1}>
-                By creating an account, you agree to our terms and confirm you&apos;re over the age of 13.
-              </Typography>
-              <br />
-            </Grid>
-            <div className={classes.img}>
+    <>
+      <div className={classes.main}>
+        <Container maxWidth="sm">
+          <Paper elevation={2} style={paperStyle}>
+            <Grid container spacing={2}>
               <Grid item xs={6}>
-                <img alt="" src="https://cdn.lbryplayer.xyz/speech/odysee-sign-up:d.png" />
+                <Typography className={classes.typography}>Join</Typography>
+                <Typography className={classes.typography1}>Email</Typography>
+                <TextField
+                  className={classes.textField}
+                  onChange={(e) => {
+                    setstate({ ...state, email: e.target.value });
+                  }}
+                  InputProps={{
+                    classes: {
+                      root: classes.root,
+                      focused: classes.focused,
+                      notchedOutline: classes.notchedOutline,
+                    },
+                  }}
+                  placeholder="yourstruly@example.com"
+                  variant="outlined"
+                />
+                <Typography className={classes.typography1}>Password</Typography>
+                <TextField
+                  onChange={(e) => {
+                    setstate({ ...state, password: e.target.value });
+                  }}
+                  className={classes.textField}
+                  InputProps={{
+                    classes: {
+                      root: classes.root,
+                      focused: classes.focused,
+                      notchedOutline: classes.notchedOutline,
+                    },
+                  }}
+                  type="password"
+                  variant="outlined"
+                />
+                <br />
+                <Grid container>
+                  <Checkbox
+                    className={classes.checkbox}
+                    icon={<CircleUnchecked />}
+                    color="primary"
+                    checkedIcon={<CircleChecked />}
+                  />{' '}
+                  <Typography className={classes.typography1}>Sync my Youtube channel</Typography>
+                </Grid>
+                <Button href="#" variant="contained" color="primary" className={classes.signUpButton} onClick={userData}>
+                  Sign up
+                </Button>
+                <Button color="primary" className={classes.loginButton}>
+                  Log in
+                </Button>
+                <br />
+
+                <Typography className={classes.typography1}>
+                  By creating an account, you agree to our terms and confirm you&apos;re over the age of 13.
+                </Typography>
+                <br />
               </Grid>
-            </div>
-          </Grid>
-        </Paper>
-      </Container>
-    </div>
+              <div className={classes.img}>
+                <Grid item xs={6}>
+                  <img alt="" src="https://cdn.lbryplayer.xyz/speech/odysee-sign-up:d.png" />
+                </Grid>
+              </div>
+            </Grid>
+          </Paper>
+        </Container>
+      </div>
+      <style>
+        {
+          `
+            .MuiInputBase-input {
+              padding: 12px 12px ;
+              border-radius: 10px;
+          }
+            `
+        }
+      </style>
+    </>
   );
 }
