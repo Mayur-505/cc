@@ -5,8 +5,10 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import {
+  makeStyles,
+} from '@material-ui/core';
 import React from 'react';
-import { makeStyles } from '@mui/styles';
 import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
 import Forgot from '../Forgot/index'
@@ -24,6 +26,7 @@ import { loginuser } from '../../Redux/action';
 import { register } from '../../utils/xino-api'
 
 
+
 export default function RegisterPage() {
   const [values, setvalues] = React.useState({
     username:'',
@@ -34,25 +37,30 @@ export default function RegisterPage() {
   });
   const [isForget, setisForget] = React.useState(false);
   const dispatch = useDispatch();
-  const history =useHistory()
-  const paperStyle: any = {
+  const history = useHistory()
 
-    width: '850px',
-    boxShadow: 'none',
-    border: '1px solid #ededed',
-    margin: '0',
-    position: 'absolute',
-    top: '40%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-
-
-  };
-
-  const paperStyleinner = {
-    justifyContent: 'space-between',
-  };
-  const useStyles: any = makeStyles({
+  const useStyles: any = makeStyles(theme => ({
+     paperStyle: {
+      boxShadow: 'none',
+      border: '1px solid #ededed',
+      margin: '0',
+    },
+    paperStyleinner : {
+      justifyContent: 'space-between',
+      // [theme.breakpoints.up('sm')]: {
+      //   width: '100%',
+      //   backgroundColor:'red'
+      // },
+      // [theme.breakpoints.up('md')]: {
+      //   width: '80%',
+      //   backgroundColor:'red'
+      // },
+      // [theme.breakpoints.up('lg')]: {
+      //   width: 'auto',
+      //   backgroundColor:'red'
+      // },
+    },
+  
     typography: {
       color: '#111',
       marginTop: '15px',
@@ -81,16 +89,21 @@ export default function RegisterPage() {
       marginRight: 'auto',
       border: 'none',
       outline: 'none',
+     
+      
+      
     },
-    signUpButton: {
+    loginButton: {
       marginTop: '20px',
       fontSize: '16px',
       fontFamily:
         'Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
       fontWeight: 'bold',
       color: 'primary',
+    
+      
     },
-    loginButton: {
+    signUpButton: {
       marginTop: '20px',
       background: 'secondry',
       color: 'primary',
@@ -115,10 +128,11 @@ export default function RegisterPage() {
         borderWidth: '4px',
       },
     },
+   
     focused: {},
     notchedOutline: {},
-  });
-  const classes = useStyles();
+  }));
+  const classes = useStyles();/*  */
 
   const handleOnSubmit = async(e: any) => {
     e.preventDefault()
@@ -175,9 +189,9 @@ export default function RegisterPage() {
     <>
       <div>
         <div className={classes.main}>
-          <Container maxWidth="sm">
-            <Paper style={paperStyle}>
-              <Grid container style={paperStyleinner} >
+          <Container>
+            <Paper className={classes.paperStyle}>
+              <Grid container className={classes.paperStyleinner} >
                 <Grid xs={12} lg={6} style={{ padding: '16px' }}>
                   <Typography className={classes.typography}>
                     Join
@@ -200,7 +214,6 @@ export default function RegisterPage() {
                     <Typography className={classes.typography1}>Email</Typography>
                     <TextField
                       className={classes.textField}
-
                       name="email"
                       onChange={handleOnChange}
                       InputProps={{
@@ -248,22 +261,19 @@ export default function RegisterPage() {
                       }}
                       variant="outlined"
                     />
-                    <FormControl>
-                      <Typography className={classes.typography1}>Gender</Typography>
-                      <RadioGroup
-                        row
-                        aria-labelledby="demo-row-radio-buttons-group-label"
-                        name="gender"
-                        onChange={handleOnChange}
-                      >
-                        <FormControlLabel value="female" control={<Radio />} label="Female" />
-                        <FormControlLabel value="male" control={<Radio />} label="Male" />
+
+                    <Typography className={classes.typography1}>Gender</Typography>
+                    <RadioGroup
+                      row
+                      aria-labelledby="demo-row-radio-buttons-group-label"
+                      name="row-radio-buttons-group"
+                    >
+                      <FormControlLabel value="female" control={<Radio />} label="Female" />
+                      <FormControlLabel value="male" control={<Radio />} label="Male" />
 
 
-                      </RadioGroup>
-                    </FormControl>
+                    </RadioGroup>
 
-                    <br />
                     <Grid container>
                       <Checkbox
                         className={classes.checkbox}
@@ -317,6 +327,9 @@ export default function RegisterPage() {
           .MuiInputBase-input {
             padding: 12px 12px ;
             border-radius: 10px;
+        }
+        .MuiCheckbox-root {
+          padding-left : 0px;
         }
           `
         }

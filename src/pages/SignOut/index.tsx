@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom'
 import { useDispatch} from 'react-redux';
-import { loginuser } from '../../reduxs/action';
+import { loginuser } from '../../Redux/action';
+
 const SignOut = () => {
 
     const history = useHistory()
@@ -9,7 +10,11 @@ const SignOut = () => {
     console.log('ok')
 
    useEffect(() => {
-     dispatch(loginuser())
+     dispatch(loginuser({
+      'username': null,
+      'userId': null,
+      'auth': false
+     }))
      history.push('/signin')
     }, []);
     

@@ -26,24 +26,17 @@ export default function SignIn() {
   const [isForget, setisForget] = React.useState(false);
   const dispatch = useDispatch();
   const history =useHistory()
-  const paperStyle: any = {
-
-    width: '850px',
-    boxShadow: 'none',
-    border: '1px solid #ededed',
-    margin: '0',
-    position: 'absolute',
-    top: '40%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-
-
-  };
+  // const dispatch = useDispatch();
 
   const paperStyleinner = {
     justifyContent: 'space-between',
   };
   const useStyles: any = makeStyles({
+    paperStyle: {
+      boxShadow: 'none',
+      border: '1px solid #ededed',
+      margin: '0',
+    },
     typography: {
       color: '#111',
       marginTop: '15px',
@@ -87,6 +80,11 @@ export default function SignIn() {
     },
     img: {
       backgroundColor: '#fef1f6',
+      borderTopRightRadius: '15px',
+      borderBottomRightRadius: '15px',
+    },
+    input: {
+      padding: '0px'
     },
     root: {
       '&$focused $notchedOutline': {
@@ -135,19 +133,17 @@ export default function SignIn() {
       }
     } catch (error) {
       console.log("error", error);
-
-
     }
 
-
   }
+ 
   if(!isForget){
   return (
     <>
       <div>
         <div className={classes.main}>
-          <Container maxWidth="sm">
-            <Paper style={paperStyle}>
+          <Container>
+            <Paper className={classes.paperStyle} >
               <Grid container style={paperStyleinner} >
                 <Grid xs={12} lg={6} style={{ padding: '16px' }}>
                   <Typography className={classes.typography}>
@@ -174,7 +170,6 @@ export default function SignIn() {
                       className={classes.textField}
                       type="password"
                       name="password"
-
                       onChange={(e) => { setvalues({ ...values, password: e.target.value }) }}
                       InputProps={{
                         className: classes.input,
@@ -191,7 +186,6 @@ export default function SignIn() {
                     <div onClick={() => setisForget(!isForget)}>
                       <Link>Forgot Password?</Link>                  
                       </div>
-
                       {values.authError &&
                       <div>
                         <Typography color="primary">
@@ -199,7 +193,6 @@ export default function SignIn() {
                         </Typography>
                       </div>
                     }
-                 
                     <Button
                       type="submit"
                       variant="contained"
