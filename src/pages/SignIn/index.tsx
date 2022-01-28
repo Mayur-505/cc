@@ -64,7 +64,7 @@ export default function SignIn() {
       fontSize: '16px',
       fontFamily:
         'Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
-      fontWeight: 'bold',
+      // fontWeight: 'bold',
       color: 'primary',
     },
     loginButton: {
@@ -76,7 +76,7 @@ export default function SignIn() {
         'Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
       borderRadius: '10px',
       marginLeft: '7px',
-      fontWeight: 'bold',
+      // fontWeight: 'bold',
     },
     img: {
       backgroundColor: '#fef1f6',
@@ -85,6 +85,15 @@ export default function SignIn() {
     },
     input: {
       padding: '0px'
+    },
+    err:{
+      backgroundColor:'#fcafca',
+      color:'#991b1b',
+      padding:'8px',
+      textAlign:'center',
+      fontWeight:'bold',
+      fontSize:'16px'
+   
     },
     root: {
       '&$focused $notchedOutline': {
@@ -182,13 +191,7 @@ export default function SignIn() {
                     <div onClick={() => setisForget(!isForget)}>
                       <Link>Forgot Password?</Link>                  
                       </div>
-                      {values.authError &&
-                      <div>
-                        <Typography color="primary">
-                          {values.authError}
-                        </Typography>
-                      </div>
-                    }
+                   
                     <Button
                       type="submit"
                       variant="contained"
@@ -198,7 +201,16 @@ export default function SignIn() {
                       Sign In
                     </Button>
                     <Button onClick={()=>{history.push('/signup')}} color="primary" className={classes.signUpButton}>sign Up</Button>
+                  
                   </form>
+                  <br/>
+                  {values.authError &&
+                      <div className={classes.err}>
+                        <Typography className={classes.err}>
+                          {values.authError}
+                        </Typography>
+                      </div>
+                    }
                 </Grid>
                 <Grid item xs={12} lg={6}>
                   <div className={classes.img}>

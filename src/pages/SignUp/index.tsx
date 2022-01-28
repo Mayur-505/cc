@@ -91,7 +91,7 @@ export default function RegisterPage() {
       fontSize: '16px',
       fontFamily:
         'Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
-      fontWeight: 'bold',
+      // fontWeight: 'bold',
       color: 'primary',
     },
     signUpButton: {
@@ -103,7 +103,7 @@ export default function RegisterPage() {
         'Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
       borderRadius: '10px',
       marginLeft: '7px',
-      fontWeight: 'bold',
+      // fontWeight: 'bold',
     },
     img: {
       backgroundColor: '#fef1f6',
@@ -115,6 +115,14 @@ export default function RegisterPage() {
     },
     input: {
       padding: '0px'
+    },
+    err:{
+      backgroundColor:'#fcafca',
+      color:'#991b1b',
+      padding:'8px',
+      textAlign:'center',
+      fontWeight:'bold',
+      fontSize:'16px'
     },
     root: {
       '&$focused $notchedOutline': {
@@ -187,6 +195,7 @@ export default function RegisterPage() {
                     <TextField
                       className={classes.textField}
                       name="username"
+                      placeholder="Enter Your UserName"
                       onChange={handleOnChange}
                       InputProps={{
                         classes: {
@@ -201,6 +210,7 @@ export default function RegisterPage() {
                     <TextField
                       className={classes.textField}
                       name="email"
+                      placeholder="Enter Your Email"
                       onChange={handleOnChange}
                       InputProps={{
                         classes: {
@@ -216,6 +226,7 @@ export default function RegisterPage() {
                       className={classes.textField}
                       type="password"
                       name="password"
+                      placeholder="Enter Your Password"
                       onChange={handleOnChange}
                       // onChange={(e)=>{setstate({...state,password:e.target.value})}}
                       InputProps={{
@@ -235,6 +246,7 @@ export default function RegisterPage() {
                       type="password"
                       name="confirm_password"
                       onChange={handleOnChange}
+                      placeholder="Confirm Your Password"
                       // onChange={(e)=>{setstate({...state,password:e.target.value})}}
                       InputProps={{
                         className: classes.input,
@@ -271,13 +283,6 @@ export default function RegisterPage() {
                         Sync my Youtube channel
                       </Typography>
                     </Grid>
-                    {values.authError &&
-                      <div>
-                        <Typography color="primary">
-                          {values.authError}
-                        </Typography>
-                      </div>
-                    }
                     <Button
                       type="submit"
                       variant="contained"
@@ -291,7 +296,15 @@ export default function RegisterPage() {
                       By creating an account, you agree to our terms and confirm
                       you&apos;re over the age of 13.
                     </Typography>
+                    <br/>
                   </form>
+                  {values.authError &&
+                      <div className={classes.err}>
+                        <Typography className={classes.err}>
+                          {values.authError}
+                        </Typography>
+                      </div>
+                    }
                 </Grid>
                 <Grid className={classes.img} item xs={12} lg={6}>
                     <img

@@ -18,7 +18,7 @@ export const getAppTheme = (mode: typeof LIGHT_MODE_THEME | typeof DARK_MODE_THE
         }
       },
       typography: {
-        fontFamily: 'Times New Roman',
+        fontFamily: 'Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
         fontSize: 15,
         h1: {
           // incase
