@@ -6,17 +6,11 @@ import {
     Typography,
   } from '@mui/material';
   import { makeStyles } from '@mui/styles';
-
-
   import React,{ useState  } from 'react';
   import Paper from '@mui/material/Paper';
-
-//   import { useDispatch } from 'react-redux';
-//   import { loginData } from './action';
-  import Link from '@mui/material/Link';
-
   import Divider from '@mui/material/Divider';
-//   import { reset_password } from '../../utils/xino-api';
+
+
   export default function Forgot() {
     const [values, setvalues] = React.useState({});
     const [state,setstate]= useState({
@@ -87,31 +81,8 @@ import {
   
     const handleOnSubmit = (e:any) => {
       e.preventDefault()
-      console.log(values)
-      // dispatch(loginData(values))
     }
-    const handleOnChange = (e:any) => {
-      e.persist()
-      setvalues((value) => ({ ...value, [e.target.name]: e.target.value }));
-  
-    }
-    // const resetPassword = async(e)=>{
-       
-    //       const formData = new FormData()
-    //       formData.append('v', '1.0');
-    //       formData.append('server_key', '1312a113c58715637a94437389326a49');
-    //       formData.append('username', state.email);
-         
-        
-      
-    //       try {
-    //       const reg = reset_password(formData)
-          
-    //       }
-    //       catch (err) {
-    //         console.error(err)
-    //       }
-    //   }
+
     return (
         <>
       <div>

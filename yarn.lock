@@ -2925,7 +2925,7 @@
     "micromatch" "^3.1.4"
     "normalize-path" "^2.1.1"
 
-"anymatch@^3.0.3", "anymatch@~3.1.1":
+"anymatch@^3.0.3":
   "integrity" "sha512-mM8522psRCqzV+6LhomX5wgp25YVibjh8Wj23I5RPkPppSVSjyKD2A2mBJmWGa+KN7f2D6LNh9jkBCeyLktzjg=="
   "resolved" "https://registry.npmjs.org/anymatch/-/anymatch-3.1.1.tgz"
   "version" "3.1.1"
@@ -3381,6 +3381,7 @@
   "resolved" "https://registry.npmjs.org/binary-extensions/-/binary-extensions-1.13.1.tgz"
   "version" "1.13.1"
 
+<<<<<<< Updated upstream
 "binary-extensions@^2.0.0":
   "integrity" "sha512-1Yj8h9Q+QDF5FzhMs/c9+6UntbD5MkRfRwac8DoEm9ZfUBZ7tZ55YcGVAzEe4bXsdQHEk+s9S5wsOKVdZrw0tQ=="
   "resolved" "https://registry.npmjs.org/binary-extensions/-/binary-extensions-2.1.0.tgz"
@@ -3393,6 +3394,8 @@
   dependencies:
     "file-uri-to-path" "1.0.0"
 
+=======
+>>>>>>> Stashed changes
 "bluebird@^3.5.5":
   "integrity" "sha512-XpNj6GDQzdfW+r2Wnn7xiSAd7TM3jzkxGXBGTtWKuSXv1xUV+azxAm8jdWZN06QTQk+2N2XB9jRDkvbmQmcRtg=="
   "resolved" "https://registry.npmjs.org/bluebird/-/bluebird-3.7.2.tgz"
@@ -3475,7 +3478,7 @@
     "split-string" "^3.0.2"
     "to-regex" "^3.0.1"
 
-"braces@^3.0.1", "braces@~3.0.2":
+"braces@^3.0.1":
   "integrity" "sha512-b8um+L1RzM3WDSzvhm6gIz1yfTbBt6YTlcEKAvsmqCZZFw46z626lVj9j1yEPW33H5H+lBQpZMP1k8l+78Ha0A=="
   "resolved" "https://registry.npmjs.org/braces/-/braces-3.0.2.tgz"
   "version" "3.0.2"
@@ -3839,6 +3842,7 @@
   optionalDependencies:
     "fsevents" "^1.2.7"
 
+<<<<<<< Updated upstream
 "chokidar@^3.4.1":
   "integrity" "sha512-DtM3g7juCXQxFVSNPNByEC2+NImtBuxQQvWlHunpJIS5Ocr0lG306cC7FCi7cEA0fzmybPUIl4txBIobk1gGOQ=="
   "resolved" "https://registry.npmjs.org/chokidar/-/chokidar-3.4.3.tgz"
@@ -3853,6 +3857,8 @@
     "normalize-path" "~3.0.0"
     "readdirp" "~3.5.0"
 
+=======
+>>>>>>> Stashed changes
 "chownr@^1.1.1":
   "integrity" "sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg=="
   "resolved" "https://registry.npmjs.org/chownr/-/chownr-1.1.4.tgz"
@@ -6018,7 +6024,7 @@
     "is-glob" "^3.1.0"
     "path-dirname" "^1.0.0"
 
-"glob-parent@^5.1.0", "glob-parent@^5.1.2", "glob-parent@~5.1.0":
+"glob-parent@^5.1.0", "glob-parent@^5.1.2":
   "integrity" "sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow=="
   "resolved" "https://registry.npmjs.org/glob-parent/-/glob-parent-5.1.2.tgz"
   "version" "5.1.2"
@@ -6650,13 +6656,6 @@
   dependencies:
     "binary-extensions" "^1.0.0"
 
-"is-binary-path@~2.1.0":
-  "integrity" "sha512-ZMERYes6pDydyuGidse7OsHxtbI7WVeUEozgR/g7rd0xUimYNlvZRE/K2MgZTjWy725IfelLeVcEM97mmtRGXw=="
-  "resolved" "https://registry.npmjs.org/is-binary-path/-/is-binary-path-2.1.0.tgz"
-  "version" "2.1.0"
-  dependencies:
-    "binary-extensions" "^2.0.0"
-
 "is-boolean-object@^1.1.0":
   "integrity" "sha512-bXdQWkECBUIAcCkeH1unwJLIpZYaa5VvuygSyS/c2lf719mTKZDU5UdDRlpd01UjADgmW8RfqaP+mRaVPdr/Ng=="
   "resolved" "https://registry.npmjs.org/is-boolean-object/-/is-boolean-object-1.1.1.tgz"
@@ -6791,7 +6790,7 @@
   dependencies:
     "is-extglob" "^2.1.0"
 
-"is-glob@^4.0.0", "is-glob@^4.0.1", "is-glob@~4.0.1":
+"is-glob@^4.0.0", "is-glob@^4.0.1":
   "integrity" "sha512-5G0tKtBTFImOqDnLB2hG6Bp2qcKEFduo4tZu9MT/H6NQv/ghhy30o55ufafxJ/LdH79LLs2Kfrn85TLKyA7BUg=="
   "resolved" "https://registry.npmjs.org/is-glob/-/is-glob-4.0.1.tgz"
   "version" "4.0.1"
@@ -8436,7 +8435,7 @@
   dependencies:
     "remove-trailing-separator" "^1.0.1"
 
-"normalize-path@^3.0.0", "normalize-path@~3.0.0":
+"normalize-path@^3.0.0":
   "integrity" "sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA=="
   "resolved" "https://registry.npmjs.org/normalize-path/-/normalize-path-3.0.0.tgz"
   "version" "3.0.0"
@@ -10013,7 +10012,11 @@
     "strip-ansi" "6.0.0"
     "text-table" "0.2.0"
 
+<<<<<<< Updated upstream
 "react-dom@^17.0.1":
+=======
+"react-dom@^16.8.0 || ^17.0.0", "react-dom@^17.0.1":
+>>>>>>> Stashed changes
   "integrity" "sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz"
   "version" "17.0.2"
@@ -10190,7 +10193,11 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
+<<<<<<< Updated upstream
 "react@^17.0.1":
+=======
+"react@^16.8.0 || ^17.0.0", "react@^16.8.3 || ^17", "react@^17.0.1":
+>>>>>>> Stashed changes
   "integrity" "sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA=="
   "resolved" "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   "version" "17.0.2"
@@ -10369,13 +10376,6 @@
     "micromatch" "^3.1.10"
     "readable-stream" "^2.0.2"
 
-"readdirp@~3.5.0":
-  "integrity" "sha512-cMhu7c/8rdhkHXWsY+osBhfSy0JikwpHK/5+imo+LpeasTF8ouErHrlYkwT0++njiyuDvc7OFY5T3ukvZ8qmFQ=="
-  "resolved" "https://registry.npmjs.org/readdirp/-/readdirp-3.5.0.tgz"
-  "version" "3.5.0"
-  dependencies:
-    "picomatch" "^2.2.1"
-
 "recursive-readdir@2.2.2":
   "integrity" "sha512-nRCcW9Sj7NuZwa2XvH9co8NPeXUBhZP7CRKJtU+cS6PW9FpCIFoI5ib0NT1ZrbNuPoRy0ylyCaUL8Gih4LSyFg=="
   "resolved" "https://registry.npmjs.org/recursive-readdir/-/recursive-readdir-2.2.2.tgz"
@@ -10396,7 +10396,11 @@
   "resolved" "https://registry.npmjs.org/redux-persist/-/redux-persist-6.0.0.tgz"
   "version" "6.0.0"
 
+<<<<<<< Updated upstream
 "redux@^4.0.0", "redux@^4.1.2":
+=======
+"redux@^4.0.0", "redux@^4.1.2", "redux@>4.0.0":
+>>>>>>> Stashed changes
   "integrity" "sha512-SH8PglcebESbd/shgf6mii6EIoRM0zrQyjcuQ+ojmfxjTtE0z9Y8pa62iA/OJ58qjP6j27uyW4kUF4jl/jd6sw=="
   "resolved" "https://registry.npmjs.org/redux/-/redux-4.1.2.tgz"
   "version" "4.1.2"
@@ -12328,13 +12332,6 @@
   "version" "1.0.7"
   dependencies:
     "makeerror" "1.0.x"
-
-"watchpack-chokidar2@^2.0.1":
-  "integrity" "sha512-nCFfBIPKr5Sh61s4LPpy1Wtfi0HE8isJ3d2Yb5/Ppw2P2B/3eVSEBjKfN0fmHJSK14+31KwMKmcrzs2GM4P0Ww=="
-  "resolved" "https://registry.npmjs.org/watchpack-chokidar2/-/watchpack-chokidar2-2.0.1.tgz"
-  "version" "2.0.1"
-  dependencies:
-    "chokidar" "^2.1.8"
 
 "watchpack@^1.7.4":
   "integrity" "sha512-9P3MWk6SrKjHsGkLT2KHXdQ/9SNkyoJbabxnKOoJepsvJjJG8uYTR3yTPxPQvNDI3w4Nz1xnE0TLHK4RIVe/MQ=="

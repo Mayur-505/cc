@@ -99,7 +99,6 @@ export default function SignIn() {
 
   const handleOnSubmit = async (e: any) => {
     e.preventDefault()
-    console.log("values", values)
 
     const formData = new FormData();
     formData.append('v', '1.0');
@@ -108,11 +107,8 @@ export default function SignIn() {
     formData.append('username', values.email);
     // dispatch(loginData(values))
 
-    console.log("formdata", formData);
-
     try {
       const res = await login(formData)
-      console.log("response", res);
       if (res && res.data.success_type === 'logged_in') {
         setvalues({ ...values, authError:'' })
         dispatch(loginuser({
@@ -132,7 +128,7 @@ export default function SignIn() {
         }))
       }
     } catch (error) {
-      console.log("error", error);
+      console.error("error", error);
     }
 
   }

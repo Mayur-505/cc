@@ -18,34 +18,30 @@ import CircleUnchecked from '@mui/icons-material/RadioButtonUnchecked';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginuser } from '../../Redux/action';
 import { register } from '../../utils/xino-api'
 
-
-
 export default function RegisterPage() {
   const [values, setvalues] = React.useState({
-    username:'',
-    email:'',
-   password:'',
-   confirm_password:'',
-   authError:''
+    username: '',
+    email: '',
+    password: '',
+    confirm_password: '',
+    authError: ''
   });
   const [isForget, setisForget] = React.useState(false);
   const dispatch = useDispatch();
   const history = useHistory()
 
   const useStyles: any = makeStyles(theme => ({
-     paperStyle: {
+    paperStyle: {
       boxShadow: 'none',
       border: '1px solid #ededed',
       margin: '0',
     },
-    paperStyleinner : {
+    paperStyleinner: {
       justifyContent: 'space-between',
       // [theme.breakpoints.up('sm')]: {
       //   width: '100%',
@@ -60,7 +56,7 @@ export default function RegisterPage() {
       //   backgroundColor:'red'
       // },
     },
-  
+
     typography: {
       color: '#111',
       marginTop: '15px',
@@ -89,9 +85,6 @@ export default function RegisterPage() {
       marginRight: 'auto',
       border: 'none',
       outline: 'none',
-     
-      
-      
     },
     loginButton: {
       marginTop: '20px',
@@ -100,8 +93,6 @@ export default function RegisterPage() {
         'Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"',
       fontWeight: 'bold',
       color: 'primary',
-    
-      
     },
     signUpButton: {
       marginTop: '20px',
@@ -118,6 +109,9 @@ export default function RegisterPage() {
       backgroundColor: '#fef1f6',
       borderTopRightRadius: '15px',
       borderBottomRightRadius: '15px',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center'
     },
     input: {
       padding: '0px'
@@ -128,53 +122,45 @@ export default function RegisterPage() {
         borderWidth: '4px',
       },
     },
-   
     focused: {},
     notchedOutline: {},
   }));
   const classes = useStyles();/*  */
 
-  const handleOnSubmit = async(e: any) => {
+  const handleOnSubmit = async (e: any) => {
     e.preventDefault()
-  console.log("value",values);
 
-  const formData = new FormData();
-  formData.append('v', '1.0');
-  formData.append('server_key', '1312a113c58715637a94437389326a49');
-  formData.append('username', values.username);
-  formData.append('email', values.email);
-  formData.append('password', values.password);
-  formData.append('confirm_password', values.confirm_password);
-  // dispatch(loginData(values))
+    const formData = new FormData();
+    formData.append('v', '1.0');
+    formData.append('server_key', '1312a113c58715637a94437389326a49');
+    formData.append('username', values.username);
+    formData.append('email', values.email);
+    formData.append('password', values.password);
+    formData.append('confirm_password', values.confirm_password);
 
-  console.log("formdata", formData);
+    try {
+      const res = await register(formData)
+      if (res && res.data.success_type === 'registered') {
+        setvalues({ ...values, authError: '' })
+        dispatch(loginuser({
+          'username': values.username,
+          'userId': res.data.data.user_id,
+          'auth': true
+        }))
 
-  try {
-    const res = await register(formData)
-    console.log("response", res);
-    if (res && res.data.success_type === 'registered') {
-      setvalues({ ...values, authError:'' })
-      dispatch(loginuser({
-        'username': values.username,
-        'userId': res.data.data.user_id,
-        'auth': true
-      }))
-
-      history.push('/')
+        history.push('/')
+      }
+      else {
+        setvalues({ ...values, authError: res.data.errors.error_text })
+        dispatch(loginuser({
+          'username': undefined,
+          'userId': undefined,
+          'auth': false
+        }))
+      }
+    } catch (error) {
+      console.error("error", error);
     }
-    else {
-      setvalues({ ...values, authError: res.data.errors.error_text })
-      dispatch(loginuser({
-        'username': undefined,
-        'userId': undefined,
-        'auth': false
-      }))
-    }
-  } catch (error) {
-    console.log("error", error);
-
-
-  }
 
     // dispatch(loginData(values))
 
@@ -300,20 +286,18 @@ export default function RegisterPage() {
                     >
                       Sign Up
                     </Button>
-                    <Button onClick={()=>{history.push('/signin')}} color="primary" className={classes.signUpButton}>Sign In</Button>
+                    <Button onClick={() => { history.push('/signin') }} color="primary" className={classes.signUpButton}>Sign In</Button>
                     <Typography className={classes.typography1}>
                       By creating an account, you agree to our terms and confirm
                       you&apos;re over the age of 13.
                     </Typography>
                   </form>
                 </Grid>
-                <Grid item xs={12} lg={6}>
-                  <div className={classes.img}>
+                <Grid className={classes.img} item xs={12} lg={6}>
                     <img
                       alt=""
                       src="https://cdn.lbryplayer.xyz/speech/odysee-sign-up:d.png"
                     />
-                  </div>
                 </Grid>
 
               </Grid>
