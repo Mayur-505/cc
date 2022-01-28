@@ -3,12 +3,15 @@ import { useContext } from 'react';
 import { Helmet } from 'react-helmet';
 
 import logo from '../logo.svg';
-
+import { useSelector, useDispatch } from 'react-redux';
 import { AppContext } from '../contexts';
 import { APP_TITLE, PAGE_TITLE_HOME } from '../utils/constants';
 
 export const Home = () => {
   const context = useContext(AppContext);
+const data=useSelector(state=>state)
+
+console.log("dattaa",data);
 
   return (
     <>
@@ -24,6 +27,8 @@ export const Home = () => {
     </>
   );
 };
+
+
 
 const LogoWrapper = styled('div')`
   text-align: center;

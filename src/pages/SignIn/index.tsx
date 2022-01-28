@@ -11,12 +11,21 @@ import Paper from '@mui/material/Paper';
 import Link from '@mui/material/Link';
 import Forgot from '../Forgot/index'
 
+import { useSelector, useDispatch } from 'react-redux';
+import { login } from '../../utils/xino-api'
+import { loginuser } from '../../Redux/action';
+import { useHistory } from 'react-router-dom';
 
 
 export default function SignIn() {
-  const [values, setvalues] = React.useState({});
+  const [values, setvalues] = React.useState({
+    email: '',
+    password: '',
+    authError: ''
+  });
   const [isForget, setisForget] = React.useState(false);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const history =useHistory()
   const paperStyle: any = {
 
     width: '850px',
@@ -78,11 +87,6 @@ export default function SignIn() {
     },
     img: {
       backgroundColor: '#fef1f6',
-      borderTopRightRadius: '15px',
-      borderBottomRightRadius: '15px',
-    },
-    input: {
-      padding: '0px'
     },
     root: {
       '&$focused $notchedOutline': {
@@ -95,14 +99,46 @@ export default function SignIn() {
   });
   const classes = useStyles();
 
-  const handleOnSubmit = (e: any) => {
+  const handleOnSubmit = async (e: any) => {
     e.preventDefault()
-    console.log(values)
+    console.log("values", values)
+
+    const formData = new FormData();
+    formData.append('v', '1.0');
+    formData.append('server_key', '1312a113c58715637a94437389326a49');
+    formData.append('password', values.password);
+    formData.append('username', values.email);
     // dispatch(loginData(values))
-  }
-  const handleOnChange = (e: any) => {
-    e.persist()
-    setvalues((value) => ({ ...value, [e.target.name]: e.target.value }));
+
+    console.log("formdata", formData);
+
+    try {
+      const res = await login(formData)
+      console.log("response", res);
+      if (res && res.data.success_type === 'logged_in') {
+        setvalues({ ...values, authError:'' })
+        dispatch(loginuser({
+          'username': values.email,
+          'userId': res.data.data.user_id,
+          'auth': true
+        }))
+
+        history.push('/')
+      }
+      else {
+        setvalues({ ...values, authError: res.data.errors.error_text })
+        dispatch(loginuser({
+          'username': undefined,
+          'userId': undefined,
+          'auth': false
+        }))
+      }
+    } catch (error) {
+      console.log("error", error);
+
+
+    }
+
 
   }
   if(!isForget){
@@ -123,7 +159,7 @@ export default function SignIn() {
                       className={classes.textField}
                       placeholder="yourstruly@gmail.com"
                       name="email"
-                      onChange={handleOnChange}
+                      onChange={(e) => { setvalues({ ...values, email: e.target.value }) }}
                       InputProps={{
                         classes: {
                           root: classes.root,
@@ -138,7 +174,8 @@ export default function SignIn() {
                       className={classes.textField}
                       type="password"
                       name="password"
-                      // onChange={(e)=>{setstate({...state,password:e.target.value})}}
+
+                      onChange={(e) => { setvalues({ ...values, password: e.target.value }) }}
                       InputProps={{
                         className: classes.input,
 
@@ -154,6 +191,14 @@ export default function SignIn() {
                     <div onClick={() => setisForget(!isForget)}>
                       <Link>Forgot Password?</Link>                  
                       </div>
+
+                      {values.authError &&
+                      <div>
+                        <Typography color="primary">
+                          {values.authError}
+                        </Typography>
+                      </div>
+                    }
                  
                     <Button
                       type="submit"
