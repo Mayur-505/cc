@@ -4,12 +4,12 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import { Layout } from './components/Layout';
 import { PageDefault } from './components/PageDefault';
-
 import { AppContext, ThemeModeContext } from './contexts';
 import { AppClient } from './clients';
 import { routes } from './config';
 import { Route as AppRoute } from './types';
 import { getAppTheme } from './styles/theme';
+import ProtectedRoute from './utils/ProtectedRoutes'
 import { DARK_MODE_THEME, LIGHT_MODE_THEME } from './utils/constants';
 import '../src/styles/app.css'
 import { combineReducers, createStore } from 'redux';
@@ -51,11 +51,16 @@ function App() {
     []
   );
 
-  const theme:any = useMemo(() => getAppTheme(mode), [mode]);
+  const theme: any = useMemo(() => getAppTheme(mode), [mode]);
 
-  const addRoute = (route: AppRoute) => (
-    <Route key={route.key} path={route.path} component={route.component || PageDefault} exact />
-  );
+  const addRoute = (route: AppRoute) => {
+    if(route.isEnabled){
+      return (<Route key={route.key} path={route.path} component={route.component || PageDefault} exact />)
+    }
+    else {
+      return (<ProtectedRoute exact path={route.path} auth={true} component={route.component || PageDefault} />)
+    }
+  };
 
   return (
     <AppContext.Provider value={appClient}>

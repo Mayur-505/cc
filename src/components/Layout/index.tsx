@@ -11,6 +11,8 @@ export const Layout: FC = ({ children }) => {
   const [open, setOpen] = useState(false);
   const toggleNavigation = () => setOpen((status) => !status);
 
+  
+
   return (
     <LayoutWrapper>
       <ContentWrapper>
